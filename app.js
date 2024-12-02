@@ -18,9 +18,10 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+// Xử lý logic đăng nhập
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
-    // Xử lý logic đăng nhập (kiểm tra với cơ sở dữ liệu hoặc mảng giả)
+    // Kiểm tra với thông tin đăng nhập giả (hoặc cơ sở dữ liệu thực tế)
     if (username === 'admin' && password === 'password') {
         res.send('Đăng nhập thành công!');
     } else {
@@ -28,7 +29,8 @@ app.post('/login', (req, res) => {
     }
 });
 
-// Lắng nghe cổng 3000
-app.listen(3000, () => {
-    console.log('Server đang chạy trên http://localhost:3000');
+// Lắng nghe cổng. Nếu có biến môi trường PORT (khi triển khai trên Render, Heroku, v.v.), sử dụng nó, nếu không sử dụng 3000.
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server đang chạy trên http://localhost:${port}`);
 });
